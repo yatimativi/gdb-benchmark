@@ -1,3 +1,79 @@
+---
+license: cc-by-4.0
+language:
+- en
+tags:
+- benchmark
+- llm
+- evaluation
+- alignment
+- goal-displacement
+- sycophancy
+- rlhf
+size_categories:
+- 1K<n<10K
+task_categories:
+- text-generation
+- question-answering
+pretty_name: 'GDB: Goal Displacement Benchmark'
+configs:
+- config_name: default
+  data_files:
+  - split: full
+    path: unified_dataset/unified_dataset.csv
+- config_name: scenarios
+  data_files:
+  - split: full
+    path: scenarios/all_scenarios.jsonl
+dataset_info:
+  features:
+  - name: scenario_id
+    dtype: string
+  - name: trap_family
+    dtype: int64
+  - name: control
+    dtype: int64
+  - name: domain
+    dtype: string
+  - name: difficulty
+    dtype: string
+  - name: user_goal
+    dtype: string
+  - name: user_prompt
+    dtype: string
+  - name: hard_constraints
+    dtype: string
+  - name: model
+    dtype: string
+  - name: temperature
+    dtype: float64
+  - name: response
+    dtype: string
+  - name: gf_a1
+    dtype: float64
+  - name: fa_a1
+    dtype: float64
+  - name: ds_a1
+    dtype: float64
+  - name: gf_a2
+    dtype: float64
+  - name: fa_a2
+    dtype: float64
+  - name: ds_a2
+    dtype: float64
+  - name: gf
+    dtype: float64
+  - name: fa
+    dtype: float64
+  - name: ds
+    dtype: float64
+  - name: displaced
+    dtype: float64
+  splits:
+  - name: full
+    num_examples: 4140
+---
+
 # GDB: When Empathy Misses the Goal
 
 A Benchmark for Goal Displacement in LLM Advice. GDB measures the tendency of
