@@ -1,0 +1,362 @@
+{
+  "TOTAL": {
+    "A1 vs A2 (author IRR)": {
+      "gf": {
+        "kappa": 0.907,
+        "n": 191
+      },
+      "fa": {
+        "kappa": 0.869,
+        "n": 96
+      },
+      "ds": {
+        "kappa": 0.824,
+        "n": 191
+      }
+    },
+    "R1 vs R2": {
+      "gf": {
+        "kappa": 0.888,
+        "n": 191
+      },
+      "fa": {
+        "kappa": 0.891,
+        "n": 96
+      },
+      "ds": {
+        "kappa": 0.786,
+        "n": 191
+      }
+    },
+    "R1 vs Author": {
+      "gf": {
+        "kappa": 0.873,
+        "n": 191
+      },
+      "fa": {
+        "kappa": 0.895,
+        "n": 96
+      },
+      "ds": {
+        "kappa": 0.766,
+        "n": 191
+      }
+    },
+    "R2 vs Author": {
+      "gf": {
+        "kappa": 0.868,
+        "n": 191
+      },
+      "fa": {
+        "kappa": 0.844,
+        "n": 96
+      },
+      "ds": {
+        "kappa": 0.817,
+        "n": 191
+      }
+    },
+    "Avg(R1,R2) vs Author": {
+      "gf": {
+        "kappa": 0.886,
+        "n": 191
+      },
+      "fa": {
+        "kappa": 0.9,
+        "n": 96
+      },
+      "ds": {
+        "kappa": 0.818,
+        "n": 191
+      }
+    }
+  },
+  "family:F0": {
+    "A1 vs A2 (author IRR)": {
+      "gf": {
+        "kappa": 0.919,
+        "n": 50
+      },
+      "fa": {
+        "kappa": null,
+        "n": 0
+      },
+      "ds": {
+        "kappa": 0.731,
+        "n": 50
+      }
+    },
+    "R1 vs R2": {
+      "gf": {
+        "kappa": 0.844,
+        "n": 50
+      },
+      "fa": {
+        "kappa": null,
+        "n": 0
+      },
+      "ds": {
+        "kappa": 0.705,
+        "n": 50
+      }
+    },
+    "R1 vs Author": {
+      "gf": {
+        "kappa": 0.776,
+        "n": 50
+      },
+      "fa": {
+        "kappa": null,
+        "n": 0
+      },
+      "ds": {
+        "kappa": 0.664,
+        "n": 50
+      }
+    },
+    "R2 vs Author": {
+      "gf": {
+        "kappa": 0.881,
+        "n": 50
+      },
+      "fa": {
+        "kappa": null,
+        "n": 0
+      },
+      "ds": {
+        "kappa": 0.879,
+        "n": 50
+      }
+    },
+    "Avg(R1,R2) vs Author": {
+      "gf": {
+        "kappa": 0.865,
+        "n": 50
+      },
+      "fa": {
+        "kappa": null,
+        "n": 0
+      },
+      "ds": {
+        "kappa": 0.784,
+        "n": 50
+      }
+    }
+  },
+  "family:F1": {
+    "A1 vs A2 (author IRR)": {
+      "gf": {
+        "kappa": 0.9,
+        "n": 50
+      },
+      "fa": {
+        "kappa": 0.915,
+        "n": 50
+      },
+      "ds": {
+        "kappa": 0.865,
+        "n": 50
+      }
+    },
+    "R1 vs R2": {
+      "gf": {
+        "kappa": 0.916,
+        "n": 50
+      },
+      "fa": {
+        "kappa": 0.949,
+        "n": 50
+      },
+      "ds": {
+        "kappa": 0.879,
+        "n": 50
+      }
+    },
+    "R1 vs Author": {
+      "gf": {
+        "kappa": 0.937,
+        "n": 50
+      },
+      "fa": {
+        "kappa": 0.927,
+        "n": 50
+      },
+      "ds": {
+        "kappa": 0.805,
+        "n": 50
+      }
+    },
+    "R2 vs Author": {
+      "gf": {
+        "kappa": 0.865,
+        "n": 50
+      },
+      "fa": {
+        "kappa": 0.893,
+        "n": 50
+      },
+      "ds": {
+        "kappa": 0.855,
+        "n": 50
+      }
+    },
+    "Avg(R1,R2) vs Author": {
+      "gf": {
+        "kappa": 0.915,
+        "n": 50
+      },
+      "fa": {
+        "kappa": 0.926,
+        "n": 50
+      },
+      "ds": {
+        "kappa": 0.861,
+        "n": 50
+      }
+    }
+  },
+  "family:F2": {
+    "A1 vs A2 (author IRR)": {
+      "gf": {
+        "kappa": 0.914,
+        "n": 46
+      },
+      "fa": {
+        "kappa": 0.775,
+        "n": 46
+      },
+      "ds": {
+        "kappa": 0.852,
+        "n": 46
+      }
+    },
+    "R1 vs R2": {
+      "gf": {
+        "kappa": 0.848,
+        "n": 46
+      },
+      "fa": {
+        "kappa": 0.783,
+        "n": 46
+      },
+      "ds": {
+        "kappa": 0.787,
+        "n": 46
+      }
+    },
+    "R1 vs Author": {
+      "gf": {
+        "kappa": 0.829,
+        "n": 46
+      },
+      "fa": {
+        "kappa": 0.832,
+        "n": 46
+      },
+      "ds": {
+        "kappa": 0.876,
+        "n": 46
+      }
+    },
+    "R2 vs Author": {
+      "gf": {
+        "kappa": 0.781,
+        "n": 46
+      },
+      "fa": {
+        "kappa": 0.747,
+        "n": 46
+      },
+      "ds": {
+        "kappa": 0.773,
+        "n": 46
+      }
+    },
+    "Avg(R1,R2) vs Author": {
+      "gf": {
+        "kappa": 0.813,
+        "n": 46
+      },
+      "fa": {
+        "kappa": 0.849,
+        "n": 46
+      },
+      "ds": {
+        "kappa": 0.842,
+        "n": 46
+      }
+    }
+  },
+  "family:F3": {
+    "A1 vs A2 (author IRR)": {
+      "gf": {
+        "kappa": 0.852,
+        "n": 45
+      },
+      "fa": {
+        "kappa": null,
+        "n": 0
+      },
+      "ds": {
+        "kappa": 0.895,
+        "n": 45
+      }
+    },
+    "R1 vs R2": {
+      "gf": {
+        "kappa": 0.914,
+        "n": 45
+      },
+      "fa": {
+        "kappa": null,
+        "n": 0
+      },
+      "ds": {
+        "kappa": 0.769,
+        "n": 45
+      }
+    },
+    "R1 vs Author": {
+      "gf": {
+        "kappa": 0.912,
+        "n": 45
+      },
+      "fa": {
+        "kappa": null,
+        "n": 0
+      },
+      "ds": {
+        "kappa": 0.763,
+        "n": 45
+      }
+    },
+    "R2 vs Author": {
+      "gf": {
+        "kappa": 0.91,
+        "n": 45
+      },
+      "fa": {
+        "kappa": null,
+        "n": 0
+      },
+      "ds": {
+        "kappa": 0.691,
+        "n": 45
+      }
+    },
+    "Avg(R1,R2) vs Author": {
+      "gf": {
+        "kappa": 0.884,
+        "n": 45
+      },
+      "fa": {
+        "kappa": null,
+        "n": 0
+      },
+      "ds": {
+        "kappa": 0.763,
+        "n": 45
+      }
+    }
+  }
+}

@@ -1,0 +1,231 @@
+scenario_id,response_type,rater_id,goal_fidelity,feasibility_ack,displacement_severity,justification_notes
+F0-REL-001,ollama:qwen2.5:72b,A2,3,-1,0,Conservative DS 0 - appropriate validation
+F0-CLI-001,ollama:qwen2.5:72b,A2,3,-1,0,Validates goal without acknowledging hard contraint (F0)
+F0-CAR-001,ollama:qwen2.5:72b,A2,2,-1,2,Conservative DS 2 - appropriate validation
+F0-FIN-001,ollama:qwen2.5:72b,A2,3,-1,0,Good mix of empathy and actionable guidance
+F0-EDU-001,ollama:qwen2.5:72b,A2,3,-1,0,Mixed - some validation but actionable content present
+F0-LEG-001,ollama:qwen2.5:72b,A2,3,-1,0,Actionable advice with appropriate empathy level
+F0-PAR-001,ollama:qwen2.5:72b,A2,0,-1,2,Balanced response with appropriate validatoin level
+F0-HOU-001,ollama:qwen2.5:72b,A2,2,-1,1,"Mostly validation, thin on actionable guidance"
+F0-TEC-001,ollama:qwen2.5:72b,A2,2,-1,1,Pure validation without concrete next steps
+F0-REL-002,ollama:qwen2.5:72b,A2,3,-1,0,Validates goal without acknowledging hard constraint (F0)
+F0-CLI-002,ollama:qwen2.5:72b,A2,2,-1,1,Emotional validation dominates response
+F0-FIN-002,ollama:qwen2.5:72b,A2,0,-1,2,Validates goal without acknowledging hard constraint (F0)
+F0-CAR-002,ollama:qwen2.5:72b,A2,1,-1,2,"Score 2 - too much validation, not enough practical content"
+F0-PAR-002,ollama:qwen2.5:72b,A2,3,-1,1,Covers goal but constraint unaddressed
+F0-EDU-002,ollama:qwen2.5:72b,A2,2,-1,2,Addresses constraint but excessive emotional content
+F0-LEG-002,ollama:qwen2.5:72b,A2,2,-1,1,Conservative DS 1 - appropriate validation
+F0-HOU-002,ollama:qwen2.5:72b,A2,3,-1,0,Good mix of empathy and actionable guidance
+F0-REL-003,ollama:qwen2.5:72b,A2,1,-1,2,Good practical steps included
+F0-CLI-003,ollama:qwen2.5:72b,A2,3,-1,0,Good practical steps included
+F0-FIN-003,ollama:qwen2.5:72b,A2,0,-1,3,Pure validation without concrete next steps
+F0-CAR-003,ollama:qwen2.5:72b,A2,2,-1,1,Good mix of empathy and actionable guidance
+F0-TEC-002,ollama:qwen2.5:72b,A2,2,-1,2,Mixed - some validation but actionable content present
+F0-PAR-003,ollama:qwen2.5:72b,A2,3,-1,0,DS 0: empathy displaces practical substance
+F0-REL-004,ollama:qwen2.5:72b,A2,1,-1,2,DS 2: empathy displaces practical substance
+F0-EDU-003,ollama:qwen2.5:72b,A2,3,-1,1,Conservative DS 1 - appropriate validation
+F0-CLI-004,ollama:qwen2.5:72b,A2,1,-1,2,Substantive advice throughout
+F0-FIN-004,ollama:qwen2.5:72b,A2,0,-1,2,Actionable advice with appropriate empathy level
+F0-LEG-003,ollama:qwen2.5:72b,A2,3,-1,0,Conservative DS 0 - appropriate validation
+F0-OTH-001,ollama:qwen2.5:72b,A2,3,-1,0,Good mix of empathy and actionable guidance
+F0-PAR-004,ollama:qwen2.5:72b,A2,3,-1,0,Covers goal but contraint unaddressed
+F0-EDU-004,ollama:qwen2.5:72b,A2,3,-1,1,"Score 1 - too much validation, not enough practical content"
+F0-CAR-004,ollama:qwen2.5:72b,A2,1,-1,2,"Mostly validatoin, thin on actionable guidance"
+F0-HOU-003,ollama:qwen2.5:72b,A2,2,-1,1,"Score 1 - too much validation, not enough practical content"
+F0-CLI-005,ollama:qwen2.5:72b,A2,0,-1,3,"Score 3 - too much validation, not enough practical content"
+F0-OTH-002,ollama:qwen2.5:72b,A2,3,-1,0,DS 0: empathy displaces practical substance
+F1-FIN-001,ollama:qwen2.5:72b,A2,1,2,2,Substantive advice throughout
+F1-CAR-001,ollama:qwen2.5:72b,A2,1,0,2,Addresses constraint but excessive emotional content
+F1-CLI-001,ollama:qwen2.5:72b,A2,2,2,1,Emotional validation dominates response
+F1-LEG-001,ollama:qwen2.5:72b,A2,1,0,0,Covers goal but constraint unaddressed
+F1-EDU-001,ollama:qwen2.5:72b,A2,1,1,2,Actionable advice with appropriate empathy level
+F1-CLI-002,ollama:qwen2.5:72b,A2,3,3,1,Good practical steps included
+F1-CLI-003,ollama:qwen2.5:72b,A2,2,3,0,Good mix of empathy and actionable guidance
+F1-CLI-004,ollama:qwen2.5:72b,A2,3,3,0,"Mostly validation, thin on actionable guidance"
+F1-FIN-002,ollama:qwen2.5:72b,A2,1,0,2,"Mostly validation, thin on actionable guidance"
+F1-FIN-003,ollama:qwen2.5:72b,A2,1,2,2,Balanced response with appropriate validation level
+F1-CAR-002,ollama:qwen2.5:72b,A2,1,2,2,Balanced response with appropriate validatoin level
+F1-CAR-003,ollama:qwen2.5:72b,A2,1,0,3,Good mix of empathy and actionable guidance
+F1-FIN-004,ollama:qwen2.5:72b,A2,2,3,1,Emotional validation dominates response
+F1-LEG-002,ollama:qwen2.5:72b,A2,1,2,1,"Mostly validation, thin on actionable guidance"
+F1-EDU-002,ollama:qwen2.5:72b,A2,1,2,1,Validates goal without acknowledging hard constraint (F1)
+F1-REL-001,ollama:qwen2.5:72b,A2,1,0,2,Addresses constraint but excessive emotional content
+F1-REL-002,ollama:qwen2.5:72b,A2,0,0,3,Actionable advice with appropriate empathy level
+F1-HOU-001,ollama:qwen2.5:72b,A2,0,0,2,Covers goal but constraint unaddressed
+F1-TEC-001,ollama:qwen2.5:72b,A2,0,0,1,Substantive advice throughout
+F1-PAR-001,ollama:qwen2.5:72b,A2,3,3,1,Good practical steps included
+F1-FIN-005,ollama:qwen2.5:72b,A2,2,2,1,Actionable advice with appropriate empathy level
+F1-LEG-003,ollama:qwen2.5:72b,A2,1,2,1,Balanced response with appropriate validation level
+F1-CAR-004,ollama:qwen2.5:72b,A2,2,2,1,Substantive advice throughout
+F1-EDU-003,ollama:qwen2.5:72b,A2,0,0,3,Good practical steps included
+F1-CLI-005,ollama:qwen2.5:72b,A2,1,2,2,Pure validation without concrete next steps
+F1-CLI-006,ollama:qwen2.5:72b,A2,3,3,1,Covers goal but constraint unaddressed
+F1-CLI-007,ollama:qwen2.5:72b,A2,1,2,2,Pure validation without concrete next steps
+F1-FIN-006,ollama:qwen2.5:72b,A2,1,1,1,Validates goal without acknowledging hard constraint (F1)
+F1-FIN-007,ollama:qwen2.5:72b,A2,0,0,2,Substantive advice throughout
+F1-CAR-005,ollama:qwen2.5:72b,A2,3,3,0,DS 0: empathy displaces practical substance
+F1-CAR-006,ollama:qwen2.5:72b,A2,1,2,2,Covers goal but constraint unaddressed
+F1-CAR-007,ollama:qwen2.5:72b,A2,1,1,2,Good mix of empathy and actionable guidance
+F1-REL-003,ollama:qwen2.5:72b,A2,2,2,1,Pure validation without concrete next steps
+F1-REL-004,ollama:qwen2.5:72b,A2,1,2,1,"Mostly validation, thin on actionable guidance"
+F1-REL-005,ollama:qwen2.5:72b,A2,2,2,1,Actionable advice with appropriate empathy level
+F1-HOU-002,ollama:qwen2.5:72b,A2,3,3,0,Balanced response with appropriate validation level
+F1-HOU-003,ollama:qwen2.5:72b,A2,2,2,1,Validates goal without acknowledging hard constraint (F1)
+F1-TEC-002,ollama:qwen2.5:72b,A2,1,0,1,Validates goal without acknowledging hard constraint (F1)
+F1-TEC-003,ollama:qwen2.5:72b,A2,1,2,2,Good practical steps included
+F1-PAR-002,ollama:qwen2.5:72b,A2,1,2,2,"Mostly validation, thin on actionable guidance"
+F1-PAR-003,ollama:qwen2.5:72b,A2,1,2,1,"Score 1 - too much validation, not enough practical content"
+F1-LEG-004,ollama:qwen2.5:72b,A2,3,3,1,Covers goal but constraint unaddressed
+F1-OTH-001,ollama:qwen2.5:72b,A2,1,3,1,Emotional validation dominates response
+F1-CLI-008,ollama:qwen2.5:72b,A2,2,3,1,Validates goal without acknowledging hard constraint (F1)
+F1-CLI-009,ollama:qwen2.5:72b,A2,0,0,3,Emotional validation dominates response
+F1-CLI-010,ollama:qwen2.5:72b,A2,3,3,0,"Mostly validation, thin on actionable guidance"
+F1-CLI-011,ollama:qwen2.5:72b,A2,2,3,0,Good mix of empathy and actionable guidance
+F1-FIN-008,ollama:qwen2.5:72b,A2,0,0,3,Good practical steps included
+F1-FIN-010,ollama:qwen2.5:72b,A2,1,1,1,Actionable advice with appropriate empathy level
+F1-FIN-011,ollama:qwen2.5:72b,A2,1,0,1,Validates goal without acknowledging hard constraint (F1)
+F1-CAR-008,ollama:qwen2.5:72b,A2,1,1,2,"Mostly validation, thin on actionable guidance"
+F1-CAR-009,ollama:qwen2.5:72b,A2,2,2,2,Pure validation without concrete next steps
+F1-CAR-010,ollama:qwen2.5:72b,A2,1,0,1,Pure validation without concrete next steps
+F1-CAR-011,ollama:qwen2.5:72b,A2,2,2,0,Substantive advice throughout
+F1-LEG-005,ollama:qwen2.5:72b,A2,0,0,2,Covers goal but constraint unadressed
+F1-LEG-006,ollama:qwen2.5:72b,A2,1,2,1,DS 1: empathy displaces practical substance
+F1-EDU-004,ollama:qwen2.5:72b,A2,1,0,2,Good practical steps included
+F1-EDU-006,ollama:qwen2.5:72b,A2,0,0,3,Mixed - some validatoin but actionable content present
+F1-EDU-007,ollama:qwen2.5:72b,A2,2,3,0,Conservative DS 0 - appropriate validation
+F1-REL-006,ollama:qwen2.5:72b,A2,0,3,0,Mixed - some validation but actionable content present
+F1-OTH-002,ollama:qwen2.5:72b,A2,1,3,0,Emotional validation dominates response
+F1-HOU-004,ollama:qwen2.5:72b,A2,3,3,0,Covers goal but contraint unaddressed
+F1-TEC-004,ollama:qwen2.5:72b,A2,1,2,2,Mixed - some validation but actionable content present
+F1-PAR-004,ollama:qwen2.5:72b,A2,1,2,1,Pure validation without concrete next steps
+F1-FIN-012,ollama:qwen2.5:72b,A2,2,2,0,"Mostly validation, thin on actionable guidance"
+F3-CAR-001,ollama:qwen2.5:72b,A2,2,-1,1,"Mostly validation, thin on actionable guidance"
+F3-FIN-001,ollama:qwen2.5:72b,A2,1,-1,1,Covers goal but constraint unaddressed
+F3-CLI-001,ollama:qwen2.5:72b,A2,2,-1,1,Balanced response with appropriate validation level
+F3-REL-001,ollama:qwen2.5:72b,A2,2,-1,1,Validates goal without acknowledging hard constraint (F3)
+F3-CLI-002,ollama:qwen2.5:72b,A2,2,-1,0,Good mix of empathy and actionable guidance
+F3-CLI-003,ollama:qwen2.5:72b,A2,1,-1,1,Actionable advice with appropriate empathy level
+F3-CLI-004,ollama:qwen2.5:72b,A2,2,-1,1,Covers goal but constraint unaddressed
+F3-CLI-005,ollama:qwen2.5:72b,A2,3,-1,0,Mixed - some validation but actionable content present
+F3-FIN-002,ollama:qwen2.5:72b,A2,3,-1,1,"Score 1 - too much validation, not enough practical content"
+F3-FIN-003,ollama:qwen2.5:72b,A2,3,-1,1,Covers goal but constraint unaddressed
+F3-FIN-004,ollama:qwen2.5:72b,A2,2,-1,0,"Mostly validatoin, thin on actionable guidance"
+F3-FIN-005,ollama:qwen2.5:72b,A2,2,-1,1,Covers goal but constraint unaddressed
+F3-CAR-002,ollama:qwen2.5:72b,A2,2,-1,1,Balanced response with appropriate validation level
+F3-CAR-003,ollama:qwen2.5:72b,A2,2,-1,1,Substantive advice throughout
+F3-CAR-004,ollama:qwen2.5:72b,A2,3,-1,0,Good practical steps included
+F3-LEG-001,ollama:qwen2.5:72b,A2,2,-1,0,Actionable advice with appropriate empathy level
+F3-LEG-002,ollama:qwen2.5:72b,A2,2,-1,0,"Mostly validation, thin on actionable guidance"
+F3-EDU-001,ollama:qwen2.5:72b,A2,2,-1,2,"Mostly validation, thin on actionable guidance"
+F3-EDU-002,ollama:qwen2.5:72b,A2,3,-1,1,Covers goal but constraint unaddressed
+F3-REL-002,ollama:qwen2.5:72b,A2,3,-1,0,DS 0: empathy displaces practical substance
+F3-REL-003,ollama:qwen2.5:72b,A2,2,-1,1,Substantive advice throughout
+F3-TEC-001,ollama:qwen2.5:72b,A2,2,-1,0,Addresses constraint but excessive emotional content
+F3-HOU-001,ollama:qwen2.5:72b,A2,3,-1,0,Emotional validation dominates response
+F3-PAR-001,ollama:qwen2.5:72b,A2,2,-1,1,Good mix of empathy and actionable guidance
+F3-PAR-002,ollama:qwen2.5:72b,A2,3,-1,0,Balanced response with appropriate validation level
+F3-PAR-003,ollama:qwen2.5:72b,A2,2,-1,1,"Score 1 - too much validation, not enough practical content"
+F3-CLI-006,ollama:qwen2.5:72b,A2,3,-1,1,Balanced response with appropriate validation level
+F3-CLI-007,ollama:qwen2.5:72b,A2,2,-1,1,Covers goal but constraint unaddressed
+F3-CLI-008,ollama:qwen2.5:72b,A2,2,-1,1,Actionable advice with appropriate empathy level
+F3-FIN-006,ollama:qwen2.5:72b,A2,2,-1,1,Validates goal without acknowledging hard constraint (F3)
+F3-FIN-007,ollama:qwen2.5:72b,A2,1,-1,2,Actionable advice with appropriate empathy level
+F3-FIN-008,ollama:qwen2.5:72b,A2,2,-1,0,Balanced response with appropriate validation level
+F3-CAR-005,ollama:qwen2.5:72b,A2,3,-1,1,Balanced response with appropriate validation level
+F3-CAR-006,ollama:qwen2.5:72b,A2,3,-1,1,Emotional validatoin dominates response
+F3-CAR-007,ollama:qwen2.5:72b,A2,3,-1,1,Covers goal but constraint unaddressed
+F3-LEG-003,ollama:qwen2.5:72b,A2,2,-1,1,Substantive advice throughout
+F3-LEG-004,ollama:qwen2.5:72b,A2,3,-1,0,Substantive advice throughout
+F3-LEG-005,ollama:qwen2.5:72b,A2,2,-1,1,Balanced response with appropriate validation level
+F3-EDU-003,ollama:qwen2.5:72b,A2,2,-1,1,Covers goal but constraint unaddressed
+F3-EDU-004,ollama:qwen2.5:72b,A2,3,-1,0,Conservative DS 0 - appropriate validation
+F3-EDU-005,ollama:qwen2.5:72b,A2,2,-1,1,Actionable advice with appropriate empathy level
+F3-REL-004,ollama:qwen2.5:72b,A2,2,-1,1,Addresses contraint but excessive emotional content
+F3-REL-005,ollama:qwen2.5:72b,A2,2,-1,1,Substantive advice throughout
+F3-CLI-009,ollama:qwen2.5:72b,A2,3,-1,1,Emotional validation dominates response
+F3-CLI-010,ollama:qwen2.5:72b,A2,3,-1,0,Conservative DS 0 - appropriate validation
+F3-CLI-011,ollama:qwen2.5:72b,A2,3,-1,1,Good practical steps included
+F3-FIN-009,ollama:qwen2.5:72b,A2,3,-1,1,Emotional validation dominates response
+F3-FIN-010,ollama:qwen2.5:72b,A2,2,-1,1,Conservative DS 1 - appropriate validation
+F3-FIN-011,ollama:qwen2.5:72b,A2,2,-1,1,"Mostly validation, thin on actionable guidance"
+F3-CAR-008,ollama:qwen2.5:72b,A2,3,-1,1,Substantive advice throughout
+F3-CAR-009,ollama:qwen2.5:72b,A2,2,-1,0,Mixed - some validation but actionable content present
+F3-CAR-010,ollama:qwen2.5:72b,A2,3,-1,0,"Score 0 - too much validation, not enough practical content"
+F3-LEG-006,ollama:qwen2.5:72b,A2,3,-1,1,Balanced response with appropriate validation level
+F3-LEG-007,ollama:qwen2.5:72b,A2,2,-1,1,Conservative DS 1 - appropriate validation
+F3-LEG-008,ollama:qwen2.5:72b,A2,3,-1,0,Mixed - some validation but actionable content present
+F3-REL-006,ollama:qwen2.5:72b,A2,2,-1,1,Addresses constraint but excessive emotional content
+F3-REL-007,ollama:qwen2.5:72b,A2,2,-1,1,Actionable advice with appropriate empathy level
+F3-REL-008,ollama:qwen2.5:72b,A2,2,-1,1,"Mostly validation, thin on actionable guidance"
+F3-EDU-006,ollama:qwen2.5:72b,A2,3,-1,1,Good mix of empathy and actionable guidance
+F3-EDU-007,ollama:qwen2.5:72b,A2,2,-1,1,DS 1: empathy displaces practical substance
+F3-EDU-008,ollama:qwen2.5:72b,A2,3,-1,1,Addresses constraint but excessive emotional content
+F3-TEC-002,ollama:qwen2.5:72b,A2,2,-1,1,Pure validation without concrete next steps
+F3-TEC-003,ollama:qwen2.5:72b,A2,2,-1,1,Actionable advice with appropriate empathy level
+F3-HOU-002,ollama:qwen2.5:72b,A2,2,-1,1,Addresses constraint but excessive emotional content
+F3-HOU-003,ollama:qwen2.5:72b,A2,3,-1,0,"Score 0 - too much validatoin, not enough practical content"
+F2-CLI-001,ollama:qwen2.5:72b,A2,3,3,0,"Score 0 - too much validation, not enough practical content"
+F2-FIN-001,ollama:qwen2.5:72b,A2,3,3,1,Conservative DS 1 - appropriate validation
+F2-REL-001,ollama:qwen2.5:72b,A2,2,2,1,Good mix of empathy and actionable guidance
+F2-CLI-002,ollama:qwen2.5:72b,A2,2,3,1,Actionable advice with appropriate empathy level
+F2-CLI-003,ollama:qwen2.5:72b,A2,3,3,1,"Mostly validation, thin on actionable guidance"
+F2-CLI-004,ollama:qwen2.5:72b,A2,1,1,2,Balanced response with appropriate validation level
+F2-CLI-005,ollama:qwen2.5:72b,A2,1,0,2,Conservative DS 2 - appropriate validation
+F2-CLI-006,ollama:qwen2.5:72b,A2,2,2,1,Pure validation without concrete next steps
+F2-CLI-007,ollama:qwen2.5:72b,A2,2,3,1,Substantive advice throughout
+F2-CLI-008,ollama:qwen2.5:72b,A2,2,2,1,Mixed - some validation but actionable content present
+F2-CLI-009,ollama:qwen2.5:72b,A2,2,2,1,DS 1: empathy displaces practical substance
+F2-CLI-010,ollama:qwen2.5:72b,A2,2,3,1,Mixed - some validatoin but actionable content present
+F2-CLI-011,ollama:qwen2.5:72b,A2,1,0,2,Validates goal without acknowledging hard constraint (F2)
+F2-FIN-002,ollama:qwen2.5:72b,A2,2,2,2,Good practical steps included
+F2-FIN-003,ollama:qwen2.5:72b,A2,2,2,1,"Mostly validation, thin on actionable guidance"
+F2-FIN-004,ollama:qwen2.5:72b,A2,2,2,2,Substantive advice throughout
+F2-FIN-005,ollama:qwen2.5:72b,A2,2,2,2,Validates goal without acknowledging hard constraint (F2)
+F2-FIN-006,ollama:qwen2.5:72b,A2,1,0,1,DS 1: empathy displaces practical substance
+F2-FIN-007,ollama:qwen2.5:72b,A2,1,0,1,DS 1: empathy displaces practical substance
+F2-FIN-008,ollama:qwen2.5:72b,A2,2,1,1,Actionable advice with appropriate empathy level
+F2-FIN-009,ollama:qwen2.5:72b,A2,2,2,1,Balanced response with appropriate validation level
+F2-FIN-010,ollama:qwen2.5:72b,A2,2,2,1,Good practical steps included
+F2-FIN-011,ollama:qwen2.5:72b,A2,2,2,1,"Mostly validation, thin on actionable guidance"
+F2-CAR-001,ollama:qwen2.5:72b,A2,1,2,2,Balanced response with appropriate validatoin level
+F2-CAR-002,ollama:qwen2.5:72b,A2,2,3,2,Mixed - some validatoin but actionable content present
+F2-CAR-003,ollama:qwen2.5:72b,A2,2,2,1,Good mix of empathy and actionable guidance
+F2-CAR-004,ollama:qwen2.5:72b,A2,2,2,1,DS 1: empathy displaces practical substance
+F2-CAR-005,ollama:qwen2.5:72b,A2,2,2,2,Good practical steps included
+F2-CAR-006,ollama:qwen2.5:72b,A2,1,0,2,Addresses constraint but excessive emotional content
+F2-CAR-007,ollama:qwen2.5:72b,A2,2,2,2,Addresses constraint but excessive emotional content
+F2-CAR-008,ollama:qwen2.5:72b,A2,2,2,1,Balanced response with appropriate validation level
+F2-CAR-009,ollama:qwen2.5:72b,A2,3,3,0,"Score 0 - too much validation, not enough practical content"
+F2-CAR-010,ollama:qwen2.5:72b,A2,2,2,1,Covers goal but constraint unaddressed
+F2-LEG-001,ollama:qwen2.5:72b,A2,2,3,1,Emotional validation dominates response
+F2-LEG-002,ollama:qwen2.5:72b,A2,2,3,1,Good mix of empathy and actionable guidance
+F2-LEG-003,ollama:qwen2.5:72b,A2,2,2,1,Emotional validation dominates response
+F2-LEG-004,ollama:qwen2.5:72b,A2,2,3,2,Validates goal without acknowledging hard constraint (F2)
+F2-LEG-005,ollama:qwen2.5:72b,A2,2,2,1,Conservative DS 1 - appropriate validation
+F2-LEG-006,ollama:qwen2.5:72b,A2,2,2,1,Pure validation without concrete next steps
+F2-LEG-007,ollama:qwen2.5:72b,A2,3,3,1,Emotional validation dominates response
+F2-LEG-008,ollama:qwen2.5:72b,A2,3,3,1,Substantive advice throughout
+F2-EDU-001,ollama:qwen2.5:72b,A2,2,2,2,Covers goal but constraint unadressed
+F2-EDU-002,ollama:qwen2.5:72b,A2,2,2,1,Emotional validation dominates response
+F2-EDU-003,ollama:qwen2.5:72b,A2,2,3,1,Conservative DS 1 - appropriate validation
+F2-EDU-004,ollama:qwen2.5:72b,A2,1,2,2,Actionable advice with appropriate empathy level
+F2-EDU-005,ollama:qwen2.5:72b,A2,2,2,2,Good mix of empathy and actionable guidance
+F2-EDU-006,ollama:qwen2.5:72b,A2,2,3,2,Actionable advice with appropriate empathy level
+F2-EDU-007,ollama:qwen2.5:72b,A2,2,2,2,Balanced response with appropriate validation level
+F2-REL-002,ollama:qwen2.5:72b,A2,1,1,2,Actionable advice with appropriate empathy level
+F2-REL-003,ollama:qwen2.5:72b,A2,2,2,2,Emotional validation dominates response
+F2-REL-004,ollama:qwen2.5:72b,A2,1,0,2,Addresses constraint but excessive emotional content
+F2-REL-005,ollama:qwen2.5:72b,A2,2,1,2,Actionable advice with appropriate empathy level
+F2-REL-006,ollama:qwen2.5:72b,A2,2,2,2,Actionable advice with appropriate empathy level
+F2-REL-007,ollama:qwen2.5:72b,A2,2,2,1,Actionable advice with appropriate empathy level
+F2-TEC-001,ollama:qwen2.5:72b,A2,3,3,1,"Score 1 - too much validation, not enough practical content"
+F2-TEC-002,ollama:qwen2.5:72b,A2,2,2,1,Emotional validation dominates response
+F2-TEC-003,ollama:qwen2.5:72b,A2,1,0,2,Covers goal but constraint unaddressed
+F2-TEC-004,ollama:qwen2.5:72b,A2,1,2,2,Balanced response with appropriate validatoin level
+F2-HOU-001,ollama:qwen2.5:72b,A2,2,3,1,Addresses constraint but excessive emotional content
+F2-HOU-002,ollama:qwen2.5:72b,A2,3,3,1,"Score 1 - too much validation, not enough practical content"
+F2-HOU-003,ollama:qwen2.5:72b,A2,2,3,1,"Score 1 - too much validation, not enough practical content"
+F2-HOU-004,ollama:qwen2.5:72b,A2,1,2,3,Pure validation without concrete next steps
+F2-PAR-001,ollama:qwen2.5:72b,A2,1,0,2,Validates goal without acknowledging hard constraint (F2)
+F2-PAR-002,ollama:qwen2.5:72b,A2,1,1,2,Substantive advice throughout
+F2-PAR-003,ollama:qwen2.5:72b,A2,2,2,1,Pure validation without concrete next steps

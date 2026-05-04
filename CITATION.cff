@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: "If you use GDB in research, please cite as below."
+title: "When Empathy Misses the Goal: A Benchmark for Goal Displacement in LLM Advice"
+abstract: >-
+  GDB is a 230-scenario benchmark for measuring goal displacement in
+  large language models that provide advice: the substitution of warmth,
+  reassurance, or non-directive encouragement for goal-advancing content
+  when the latter is required. The release contains scenarios across nine domains, 4,134
+  human-scored model responses spanning 18 systems, and three supplementary
+  probes (external rater portability, post-training stage decomposition,
+  and a complexity-by-pressure factorial that dissociates displacement from
+  social sycophancy).
+authors:
+  - family-names: "Anonymous"
+    given-names: "Authors"
+    affiliation: "Anonymized for double-blind review"
+version: "1.0.0-anonymous"
+date-released: "2026-05-02"
+license: "CC-BY-4.0"
+keywords:
+  - "language models"
+  - "evaluation"
+  - "benchmark"
+  - "goal displacement"
+  - "alignment"
+  - "RLHF"
+  - "sycophancy"
+repository-code: "<anonymous mirror; populated at camera-ready>"
+url: "<anonymous mirror; populated at camera-ready>"
+preferred-citation:
+  type: article
+  title: "When Empathy Misses the Goal: A Benchmark for Goal Displacement in LLM Advice"
+  authors:
+    - family-names: "Anonymous"
+      given-names: "Authors"
+      affiliation: "Anonymized for double-blind review"
+  year: 2026
+  journal: "Submitted; venue anonymized for double-blind review"
+  notes: "Camera-ready citation will be populated upon acceptance."
