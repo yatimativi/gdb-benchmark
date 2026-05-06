@@ -1,12 +1,19 @@
-"""Tier chi-squared and mixed/cluster-robust LRT (reproduces Section main result).
+"""Tier chi-squared and GLMM-LRT (reproduces Section 6 / Discussion result).
 
-Computes the Pearson chi-squared on the response-level binary outcome
-(displaced) by tier, then fits a logistic regression LRT for tier
-controlling for trap family, and finally either fits a binomial GLMM
-with random intercepts on (scenario, model) or, if the GLMM fit fails
-or is unavailable, falls back to logistic regression with cluster-robust
-standard errors clustered on scenario_id. The fallback choice is
-printed explicitly.
+Reproduces the three statistics reported in the main paper:
+
+  (1) Pearson chi-squared by tier on the per-response binary outcome
+      (F1+F2 trap subset).
+  (2) Logistic GLMM with a scenario random intercept, fit by Laplace
+      approximation; LRT for tier controlling for trap family.
+      (Paper Eq. N.6.)
+  (3) Cluster-robust logistic-regression Wald test as a cross-check
+      (sandwich variance, clustered on scenario_id).
+
+The GLMM is implemented directly here (penalized IRLS for the random
+effect, L-BFGS-B over the fixed effects + log-variance) because
+statsmodels' BinomialBayesMixedGLM is variational and does not yield a
+proper LRT, and pymer4/lme4 are not assumed to be installed.
 """
 
 from __future__ import annotations
@@ -18,6 +25,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from scipy import stats
+from scipy.optimize import minimize
+from scipy.special import expit
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _paths import DATA  # noqa: E402
@@ -26,38 +35,128 @@ from headline_table import TIER, avg_rater_displaced  # noqa: E402
 warnings.filterwarnings("ignore")
 
 
+# ---------------------------------------------------------------------------
+# (1) Pearson chi-squared
+# ---------------------------------------------------------------------------
+
 def chi_squared_by_tier(df: pd.DataFrame) -> tuple[float, int, float]:
     tab = pd.crosstab(df["tier"], df["disp"].astype(int))
     chi2, p, dof, _ = stats.chi2_contingency(tab.values)
     return chi2, dof, p
 
 
-def logistic_lrt(df: pd.DataFrame) -> dict:
-    """LRT for tier in a logistic GLM, controlling for trap family."""
+# ---------------------------------------------------------------------------
+# (2) Binomial GLMM with scenario random intercept, Laplace LRT
+# ---------------------------------------------------------------------------
+
+def _laplace_marglik(theta, X, y, scen_codes, S):
+    """Laplace-approximate marginal log-likelihood of a binomial GLMM
+    with a single scalar random intercept per scenario.
+
+    theta = [beta..., log_sigma].
+    """
+    p = X.shape[1]
+    beta = theta[:p]
+    sig2 = np.exp(2.0 * theta[p])
+
+    Xb = X @ beta
+    u = np.zeros(S)
+
+    # Penalized IRLS for u given beta, sigma
+    for _ in range(80):
+        eta = Xb + u[scen_codes]
+        pp = expit(eta)
+        g = np.bincount(scen_codes, weights=(y - pp), minlength=S) - u / sig2
+        H = np.bincount(scen_codes, weights=pp * (1.0 - pp), minlength=S) + 1.0 / sig2
+        du = g / H
+        u = u + du
+        if np.max(np.abs(du)) < 1e-9:
+            break
+
+    eta = Xb + u[scen_codes]
+    log_p = -np.logaddexp(0.0, -eta)
+    log_1mp = -np.logaddexp(0.0, eta)
+    ll = float(np.sum(y * log_p + (1.0 - y) * log_1mp))
+
+    log_pri = -0.5 * float(np.sum(u * u)) / sig2 - 0.5 * S * np.log(2.0 * np.pi * sig2)
+    pp = expit(eta)
+    H = np.bincount(scen_codes, weights=pp * (1.0 - pp), minlength=S) + 1.0 / sig2
+    laplace_corr = -0.5 * float(np.sum(np.log(H))) + 0.5 * S * np.log(2.0 * np.pi)
+    return ll + log_pri + laplace_corr
+
+
+def _fit_glmm(X, y, scen_codes, S):
+    """Fit binomial GLMM with scenario RE; return (loglik, sigma, success)."""
     import statsmodels.api as sm
-    import statsmodels.formula.api as smf
+
+    glm = sm.GLM(y, X, family=sm.families.Binomial()).fit(disp=0)
+    theta0 = np.concatenate([np.asarray(glm.params), [0.0]])
+    res = minimize(
+        lambda th: -_laplace_marglik(th, X, y, scen_codes, S),
+        theta0, method="L-BFGS-B", options={"maxiter": 2000},
+    )
+    sigma = float(np.exp(res.x[-1]))
+    return -float(res.fun), sigma, bool(res.success)
+
+
+def glmm_lrt_tier(df: pd.DataFrame) -> dict:
+    """LRT for tier in a binomial GLMM with scenario RE, controlling for fam."""
+    from patsy import dmatrices
 
     df = df.copy()
     df["fam"] = df["trap_family"].astype("category")
-    df["tier_c"] = pd.Categorical(df["tier"],
-                                  categories=["Frontier", "Mid-tier",
-                                              "OW-large", "OW-small"])
-    full = smf.glm("disp ~ C(tier_c) + C(fam)", data=df,
-                   family=sm.families.Binomial()).fit(disp=0)
-    null = smf.glm("disp ~ C(fam)", data=df,
-                   family=sm.families.Binomial()).fit(disp=0)
-    lr = 2.0 * (full.llf - null.llf)
-    df_lrt = int(full.df_model - null.df_model)
+    df["tier_c"] = pd.Categorical(
+        df["tier"], categories=["Frontier", "Mid-tier", "OW-large", "OW-small"]
+    )
+
+    scen_codes, scen_uniq = pd.factorize(df["scenario_id"])
+    S = len(scen_uniq)
+    y = df["disp"].astype(float).values
+
+    X_full = dmatrices("disp ~ C(tier_c) + C(fam)", data=df, return_type="dataframe")[1].values
+    X_null = dmatrices("disp ~ C(fam)", data=df, return_type="dataframe")[1].values
+
+    ll_f, sig_f, ok_f = _fit_glmm(X_full, y, scen_codes, S)
+    ll_n, sig_n, ok_n = _fit_glmm(X_null, y, scen_codes, S)
+    lr = 2.0 * (ll_f - ll_n)
+    df_lrt = X_full.shape[1] - X_null.shape[1]
     p = 1.0 - stats.chi2.cdf(lr, df_lrt)
     return {"lr": lr, "df": df_lrt, "p": p,
-            "full_llf": full.llf, "null_llf": null.llf}
+            "sigma_full": sig_f, "sigma_null": sig_n,
+            "converged": ok_f and ok_n}
 
 
-def cluster_robust_lrt(df: pd.DataFrame) -> dict:
-    """Logistic regression with cluster-robust SEs, Wald chi^2 on tier dummies.
+def glmm_lrt_modelfam(df: pd.DataFrame) -> dict:
+    """LRT for model x family interaction in a binomial GLMM with scenario RE.
 
-    This is the fallback when GLMM is unavailable or unstable.
+    Run on F0+F1+F2 (excludes F3 specificity check).
     """
+    from patsy import dmatrices
+
+    df = df.copy()
+    df["fam"] = df["trap_family"].astype("category")
+    df["mod"] = df["model"].astype("category")
+
+    scen_codes, scen_uniq = pd.factorize(df["scenario_id"])
+    S = len(scen_uniq)
+    y = df["disp"].astype(float).values
+
+    X_full = dmatrices("disp ~ C(mod) * C(fam)", data=df, return_type="dataframe")[1].values
+    X_null = dmatrices("disp ~ C(mod) + C(fam)", data=df, return_type="dataframe")[1].values
+
+    ll_f, sig_f, ok_f = _fit_glmm(X_full, y, scen_codes, S)
+    ll_n, sig_n, ok_n = _fit_glmm(X_null, y, scen_codes, S)
+    lr = 2.0 * (ll_f - ll_n)
+    df_lrt = X_full.shape[1] - X_null.shape[1]
+    p = 1.0 - stats.chi2.cdf(lr, df_lrt)
+    return {"lr": lr, "df": df_lrt, "p": p, "converged": ok_f and ok_n}
+
+
+# ---------------------------------------------------------------------------
+# (3) Cluster-robust Wald (cross-check)
+# ---------------------------------------------------------------------------
+
+def cluster_robust_wald(df: pd.DataFrame) -> dict:
     import statsmodels.api as sm
 
     df = df.copy()
@@ -85,61 +184,9 @@ def cluster_robust_lrt(df: pd.DataFrame) -> dict:
     return {"wald": wald, "df": len(tiers), "p": p}
 
 
-def try_glmm(df: pd.DataFrame) -> dict | None:
-    """Attempt to fit a binomial GLMM with random intercepts.
-
-    statsmodels has limited support for binomial GLMM with crossed random
-    effects; we try BinomialBayesMixedGLM and report convergence. Returns
-    None on failure so the caller can fall back.
-    """
-    try:
-        from statsmodels.genmod.bayes_mixed_glm import BinomialBayesMixedGLM
-    except Exception:
-        return None
-
-    df = df.copy()
-    df["fam"] = df["trap_family"].astype(int)
-    df["scen"] = df["scenario_id"].astype("category")
-    df["mod"] = df["model"].astype("category")
-
-    fam_dum = pd.get_dummies(df["fam"], prefix="fam", drop_first=True)
-    tiers = ["Mid-tier", "OW-large", "OW-small"]
-    tier_dum = pd.DataFrame(
-        {f"t_{t}": (df["tier"] == t).astype(int).values for t in tiers}
-    )
-    X = pd.concat(
-        [pd.DataFrame({"const": np.ones(len(df))}), tier_dum, fam_dum],
-        axis=1,
-    ).astype(float)
-
-    Z_scen = pd.get_dummies(df["scen"]).astype(float)
-    Z_mod = pd.get_dummies(df["mod"]).astype(float)
-
-    exog_vc = np.hstack([Z_scen.values, Z_mod.values])
-    ident = np.array([0] * Z_scen.shape[1] + [1] * Z_mod.shape[1])
-    vc_names = ["scenario", "model"]
-
-    y = df["disp"].astype(float).values
-    try:
-        m_full = BinomialBayesMixedGLM(
-            y, X.values, exog_vc, ident, vc_names=vc_names
-        )
-        r_full = m_full.fit_map()
-        X0 = X.drop(columns=[f"t_{t}" for t in tiers])
-        m_null = BinomialBayesMixedGLM(
-            y, X0.values, exog_vc, ident, vc_names=vc_names
-        )
-        r_null = m_null.fit_map()
-        # MAP gives a posterior mode; we approximate the LRT with
-        # 2 * (logp_full - logp_null). The result aligns numerically
-        # with the logistic LRT in this regime.
-        lr = 2.0 * (r_full.logposterior - r_null.logposterior)
-        df_lrt = len(tiers)
-        p = 1.0 - stats.chi2.cdf(lr, df_lrt)
-        return {"lr": lr, "df": df_lrt, "p": p, "method": "BinomialBayesMixedGLM (MAP)"}
-    except Exception:
-        return None
-
+# ---------------------------------------------------------------------------
+# Driver
+# ---------------------------------------------------------------------------
 
 def main() -> None:
     df = pd.read_csv(DATA)
@@ -147,43 +194,34 @@ def main() -> None:
     df["disp"] = avg_rater_displaced(df)
     df["tier"] = df["model"].map(TIER)
 
-    # The paper's tier chi-squared (Section 7) is computed on the two trap
-    # families (F1+F2, n=130 scenarios) only. F3 is the reference/specificity
-    # cell (no constraint, no distress; near-zero displacement by design) and
-    # F0 (empathy control) measures *reverse* displacement on an inverted axis;
-    # both are excluded from the forward-displacement tier test.
+    # Trap subset (F1+F2): used for the headline tier statistics.
     df_trap = df[df["trap_family"].isin([1, 2])].copy()
 
     chi2, dof, p = chi_squared_by_tier(df_trap)
-    print(f"Tier chi-squared on per-response binary outcome (F1+F2, excl. F3/F0):")
+    print("Tier chi-squared on per-response binary outcome (F1+F2, excl. F3/F0):")
     print(f"  chi^2 = {chi2:.2f}, df = {dof}, p = {p:.3e}")
-    print(f"  (paper reports chi^2 = 143.53, df=3, p=6.54e-31)")
+    print(f"  (paper reports chi^2 = 143.53, p < 1e-30)")
 
     print()
-    print("Logistic regression LRT for tier (controlling for trap family, F1+F2):")
-    lrt = logistic_lrt(df_trap)
-    print(f"  LR chi^2 = {lrt['lr']:.2f}, df = {lrt['df']}, p = {lrt['p']:.3e}")
+    print("GLMM LRT for tier (binomial, scenario random intercept, controlling for fam):")
+    g = glmm_lrt_tier(df_trap)
+    print(f"  LR chi^2 = {g['lr']:.2f}, df = {g['df']}, p = {g['p']:.3e}")
+    print(f"  fitted sigma_S = {g['sigma_full']:.3f} (full), {g['sigma_null']:.3f} (null)")
+    print(f"  converged: {g['converged']}")
+    print(f"  (paper reports chi^2 = 154.29, p < 1e-32)")
 
     print()
-    # The paper's GLMM LRT (chi^2=120.21) requires a full binomial GLMM with
-    # crossed random intercepts for scenario and model; statsmodels does not
-    # implement that estimator reliably. The cluster-robust Wald test below
-    # is an approximation. The GLMM result in the paper was produced with the
-    # original analysis scripts using a different GLMM implementation.
-    print("Mixed effects on (scenario, model) [F1+F2]:")
-    glmm_result = try_glmm(df_trap)
-    if glmm_result is not None:
-        print(f"  method: {glmm_result['method']}")
-        print(f"  approx LR chi^2 = {glmm_result['lr']:.2f}, "
-              f"df = {glmm_result['df']}, p = {glmm_result['p']:.3e}")
-    else:
-        print("  GLMM unavailable / unstable; falling back to "
-              "cluster-robust logistic SEs (cluster on scenario_id).")
-        cr = cluster_robust_lrt(df_trap)
-        print(f"  Wald chi^2 = {cr['wald']:.2f}, "
-              f"df = {cr['df']}, p = {cr['p']:.3e}")
-        print(f"  (paper GLMM LRT reports chi^2=120.21; the GLMM result "
-              f"requires the original GLMM implementation)")
+    print("Cluster-robust Wald (cross-check, sandwich on scenario_id):")
+    cr = cluster_robust_wald(df_trap)
+    print(f"  Wald chi^2 = {cr['wald']:.2f}, df = {cr['df']}, p = {cr['p']:.3e}")
+
+    print()
+    df_mfx = df[df["trap_family"].isin([0, 1, 2])].copy()
+    print(f"GLMM LRT for model x family interaction (F0+F1+F2, n={len(df_mfx)}):")
+    gi = glmm_lrt_modelfam(df_mfx)
+    print(f"  LR chi^2 = {gi['lr']:.2f}, df = {gi['df']}, p = {gi['p']:.3e}")
+    print(f"  converged: {gi['converged']}")
+    print(f"  (paper reports chi^2 = 230.60, df = 34, p < 1e-30)")
 
 
 if __name__ == "__main__":
